@@ -125,7 +125,7 @@ app.get("/users/:name/tasks", (req, res) => {
   res.json(tasksAssignedToUser);
 });
 
-// View Pending Tasks:
+// 2 View Pending Tasks by status
 function getTasksByStatus(status) {
   return tasks.filter((task) => task.status === status);
 }
@@ -136,6 +136,7 @@ app.get("/tasks/pending", (req, res) => {
   res.json(pendingTasks);
 });
 
+// 3 Sort Tasks by Priority
 function getSortedTasksByPriority() {
   return tasks.sort((t1, t2) => {
     return t1.priority > t2.priority;
@@ -146,6 +147,7 @@ app.get("/tasks/sort/by-priority", (req, res) => {
   res.json(sortedTasks);
 });
 
+// 4 Update Task by Id
 function updateTaskById(id, status) {
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].id === id) {
@@ -163,6 +165,7 @@ app.post("/tasks/:id/status", (req, res) => {
     .status(200)
     .json({ message: "Updated Successfully", updatedTask: updatedTask });
 });
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
