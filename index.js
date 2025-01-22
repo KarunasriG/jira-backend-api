@@ -137,9 +137,15 @@ app.get("/tasks/pending", (req, res) => {
 });
 
 // 3 Sort Tasks by Priority
+const priorityOrder = {
+  high: 1,
+  medium: 2,
+  low: 3,
+};
+
 function getSortedTasksByPriority() {
   return tasks.sort((t1, t2) => {
-    return t1.priority > t2.priority;
+    return priorityOrder[t1.priority] - priorityOrder[t2.priority];
   });
 }
 app.get("/tasks/sort/by-priority", (req, res) => {
